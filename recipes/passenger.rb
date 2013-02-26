@@ -54,6 +54,8 @@ gem_package 'passenger' do
   action :install
   version node["nginx"]["passenger"]["version"]
   gem_binary node["nginx"]["passenger"]["gem_binary"] if node["nginx"]["passenger"]["gem_binary"]
+  source node["nginx"]["passenger"]["passenger_gemfile"] if node["nginx"]["passenger"]["passenger_gemfile"]
+  not_if "gem list | grep passenger |  grep #{node["nginx"]["passenger"]["version"]}"
 end
 
 template "#{node["nginx"]["dir"]}/conf.d/passenger.conf" do
