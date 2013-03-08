@@ -31,6 +31,8 @@ when 'package'
     else
       include_recipe 'nginx::repo'
     end
+  when 'debian','ubuntu'
+    include_recipe 'nginx::repo'
   end
   package node['nginx']['package_name']
   service 'nginx' do
